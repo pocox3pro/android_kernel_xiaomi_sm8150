@@ -1296,4 +1296,10 @@ config TOUCHSCREEN_RAYDIUM_CHIPSET
 
 	  If unsure, say N.
 
+# Xiaomi
+source "drivers/input/touchscreen/ndt_core/Kconfig"
+source "drivers/input/touchscreen/spi_xiaomi_tp/Kconfig"
+source "drivers/input/touchscreen/xiaomi/Kconfig"
+source "drivers/input/touchscreen/nt36672c/Kconfig"
+
 endif
