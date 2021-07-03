@@ -69,6 +69,8 @@ struct platform_device *qcom_ice_get_pdevice(struct device_node *node);
 #ifdef CONFIG_CRYPTO_DEV_QCOM_ICE
 int qcom_ice_setup_ice_hw(const char *storage_type, int enable);
 void qcom_ice_set_fde_flag(int flag);
+int qcom_ice_config_start(struct request *req,
+			  struct ice_data_setting *setting);
 #else
 static inline int qcom_ice_setup_ice_hw(const char *storage_type, int enable)
 {
@@ -79,12 +81,10 @@ static inline void qcom_ice_set_fde_flag(int flag) {}
 
 struct qcom_ice_variant_ops {
 	const char *name;
-	int	(*init)(struct platform_device *, void *, ice_error_cb);
 	int	(*reset)(struct platform_device *);
 	int	(*resume)(struct platform_device *);
 	int	(*suspend)(struct platform_device *);
-	int	(*config_start)(struct platform_device *, struct request *,
-				struct ice_data_setting *, bool);
+	int	(*config_start)(struct request *, struct ice_data_setting *);
 	int	(*config_end)(struct request *);
 	int	(*status)(struct platform_device *);
 	void	(*debug)(struct platform_device *);
